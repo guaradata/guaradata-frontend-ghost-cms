@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+  nginx:
+    build:
+      context: ./nginx/dev
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/dev/config/nginx:/etc/nginx
+      - ./nginx/dev/share/index.html:/usr/share/nginx/html/index.html
+    restart: on-failure:5
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - guaradata-backend
+
+  ghost:
+    image: ghost:5-alpine
+    restart: always
+    env_file: .env
+    environment:
+      # see https://ghost.org/docs/config/#configuration-options
+      - database__client=${DATABASE_CLIENT}
+      - database__connection__host=${DATABASE_HOST}
+      - database__connection__user=${DATABASE_USER}
+      - database__connection__password=${DATABASE_PASSWORD}
+      - database__connection__database=${DATABASE_NAME}
+      # this url value is just an example, and is likely wrong for your environment!
+      - url=${GHOST_URL}
+      # contrary to the default mentioned in the linked documentation, this image defaults to NODE_ENV=production (so development mode needs to be explicitly specified if desired)
+      #NODE_ENV: development
+    volumes:
+      - ghost:/var/lib/ghost/content
+    networks:
+      - guaradata-backend
+
+  ghost_mysql:
+    image: mysql:8.0
+    restart: always
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_USER=${DATABASE_USER}
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - guaradata-backend
+
+volumes:
+  ghost:
+  db:
+
+networks:
+  guaradata-backend:
+    driver: bridge
+  default:
+    external:
+      name: host
