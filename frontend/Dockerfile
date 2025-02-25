@@ -13,7 +13,7 @@ RUN apt update && npm install
 COPY . .
 
 # Define limite de memória apenas no build
-ENV NODE_OPTIONS="--max-old-space-size=768"
+ENV NODE_OPTIONS="--max-old-space-size=256"
 
 RUN npm run build && npm prune --production
 
