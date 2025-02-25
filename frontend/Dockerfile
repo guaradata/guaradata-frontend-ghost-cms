@@ -9,14 +9,15 @@ COPY package*.json .
 RUN npm cache clean --force
 
 ENV PM2_DISABLE_TTY=true
+ENV NODE_OPTIONS="--max-old-space-size=512"  # Limita a memória do Node.js a 512MB
 
 RUN apt update && \
-npm install
+    npm install
 
 COPY . .
 
 RUN npm run build && \
-npm prune --production
+    npm prune --production
 
 RUN npm install pm2 -g
 
