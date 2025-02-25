@@ -19,6 +19,7 @@ services:
   ghost:
     image: ghost:5-alpine
     restart: always
+    env_file: .env
     environment:
       - database__client=${DATABASE_CLIENT}
       - database__connection__host=${DATABASE_HOST}
@@ -34,6 +35,7 @@ services:
   ghost_mysql:
     image: mysql:8.0
     restart: always
+    env_file: .env
     environment:
       - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
       - MYSQL_USER=${DATABASE_USER}
