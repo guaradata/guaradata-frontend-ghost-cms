@@ -39,6 +39,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
       - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_PASSWORD=${DATABASE_USER_PASSWORD}
       - MYSQL_DATABASE=${DATABASE_NAME} # Adicionado para garantir criação do banco
     volumes:
       - db:/var/lib/mysql
