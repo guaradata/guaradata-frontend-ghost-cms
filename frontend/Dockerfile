@@ -1,4 +1,5 @@
-FROM node:22-slim
+# Etapa 1: Build fora do container
+FROM node:22-slim as build-stage
 
 ARG _WORKDIR=/home/node/app
 
@@ -7,17 +8,23 @@ WORKDIR ${_WORKDIR}
 COPY package*.json .
 
 RUN npm cache clean --force
-
-ENV PM2_DISABLE_TTY=true
-ENV NODE_OPTIONS="--max-old-space-size=512"
-
-RUN apt update && \
-    npm install
+RUN apt update && npm install
 
 COPY . .
 
-RUN npm run build && \
-    npm prune --production
+# Define limite de memória apenas no build
+ENV NODE_OPTIONS="--max-old-space-size=768"
+
+RUN npm run build && npm prune --production
+
+# Etapa 2: Produção (apenas copia os arquivos)
+FROM node:22-slim
+
+ARG _WORKDIR=/home/node/app
+
+WORKDIR ${_WORKDIR}
+
+COPY --from=build-stage ${_WORKDIR} ${_WORKDIR}
 
 RUN npm install pm2 -g
 
