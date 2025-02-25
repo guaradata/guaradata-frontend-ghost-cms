@@ -3,8 +3,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   runtimeConfig: {
+    GHOST_API_URL: process.env.NUXT_GHOST_API_URL,
+    GHOST_API_KEY: process.env.NUXT_GHOST_API_KEY,
+    GHOST_API_VERSION: process.env.NUXT_GHOST_API_VERSION,
     public: {
       NUXT_API_URL: process.env.NUXT_API_URL,
+      GHOST_API_URL: process.env.NUXT_GHOST_API_URL,
+      GHOST_API_KEY: process.env.NUXT_GHOST_API_KEY,
+      GHOST_API_VERSION: process.env.NUXT_GHOST_API_VERSION,
     },
   },
 

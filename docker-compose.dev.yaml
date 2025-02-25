@@ -16,6 +16,20 @@ services:
     networks:
       - guaradata-backend
 
+  ghost_mysql:
+    image: mysql:8.0
+    restart: always
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_PASSWORD=${DATABASE_USER_PASSWORD}
+      - MYSQL_DATABASE=${DATABASE_NAME}
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - guaradata-backend
+
   ghost:
     image: ghost:5-alpine
     restart: always
@@ -35,18 +49,8 @@ services:
       - ghost:/var/lib/ghost/content
     networks:
       - guaradata-backend
-
-  ghost_mysql:
-    image: mysql:8.0
-    restart: always
-    env_file: .env
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
-      - MYSQL_USER=${DATABASE_USER}
-    volumes:
-      - db:/var/lib/mysql
-    networks:
-      - guaradata-backend
+    depends_on:
+    - ghost_mysql
 
 volumes:
   ghost:

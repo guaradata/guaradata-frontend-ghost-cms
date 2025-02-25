@@ -50,6 +50,10 @@ services:
     image: ivbpinheiro/guaradata:latest  # Usando a imagem do Docker Hub
     restart: always
     env_file: .env
+    environment:
+      - NUXT_GHOST_API_URL=${NUXT_GHOST_API_URL}
+      - NUXT_GHOST_API_KEY=${NUXT_GHOST_API_KEY}
+      - NUXT_GHOST_API_VERSION=${NUXT_GHOST_API_VERSION}
     networks:
       - guaradata-backend
 
