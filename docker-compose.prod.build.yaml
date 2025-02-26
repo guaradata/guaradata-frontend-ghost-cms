@@ -52,10 +52,6 @@ services:
       dockerfile: Dockerfile
     restart: always
     env_file: .env
-    environment:
-      - NUXT_PUBLIC_GHOST_API_BASE=${NUXT_PUBLIC_GHOST_API_BASE}
-      - NUXT_PUBLIC_GHOST_API_KEY=${NUXT_PUBLIC_GHOST_API_KEY}
-      - NUXT_PUBLIC_GHOST_API_VERSION=${NUXT_PUBLIC_GHOST_API_VERSION}
     networks:
       - guaradata-backend
 
