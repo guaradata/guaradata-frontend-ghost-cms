@@ -8,7 +8,6 @@ dist/
 tsconfig.tsbuildinfo
 
 # Arquivos e diretórios específicos do npm
-package-lock.json
 yarn.lock
 
 # Outros arquivos e diretórios gerados localmente (pode variar dependendo do seu projeto)

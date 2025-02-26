@@ -47,7 +47,9 @@ services:
       - guaradata-backend
 
   nuxt-guaradata:
-    image: ivbpinheiro/guaradata:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     restart: always
     env_file: .env
     environment:

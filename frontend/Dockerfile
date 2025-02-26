@@ -1,25 +1,38 @@
-FROM node:22-slim
+# Etapa de Build
+FROM node:22-slim AS build-stage
 
-ARG _WORKDIR=/home/node/app
+WORKDIR /home/node/app
 
-WORKDIR ${_WORKDIR}
+# Copiar os arquivos necessários
+COPY package*.json ./
 
-COPY package*.json .
+# Instalar dependências
+RUN npm ci
 
-RUN npm cache clean --force
-
-ENV PM2_DISABLE_TTY=true
-
-RUN apt update && \
-npm install
-
+# Copiar o restante do código
 COPY . .
 
-RUN npm run build && \
-npm prune --production
+# Construir a aplicação com as variáveis de ambiente
+ARG NUXT_PUBLIC_GHOST_API_BASE
+ARG NUXT_PUBLIC_GHOST_API_KEY
+ARG NUXT_PUBLIC_GHOST_API_VERSION
 
-RUN npm install pm2 -g
+ENV NUXT_PUBLIC_GHOST_API_BASE=${NUXT_PUBLIC_GHOST_API_BASE}
+ENV NUXT_PUBLIC_GHOST_API_KEY=${NUXT_PUBLIC_GHOST_API_KEY}
+ENV NUXT_PUBLIC_GHOST_API_VERSION=${NUXT_PUBLIC_GHOST_API_VERSION}
 
+RUN npm run build
+
+# Etapa de Produção
+FROM node:22-slim AS production-stage
+
+WORKDIR /home/node/app
+
+# Copiar apenas os arquivos necessários
+COPY --from=build-stage /home/node/app/.output ./.output
+
+# Definir usuário não-root
 USER node
 
-CMD ["pm2-runtime", "start", "processes.json", "--only", "guaradata-frontend"]
+# Iniciar a aplicação
+CMD ["node", ".output/server/index.mjs"]
