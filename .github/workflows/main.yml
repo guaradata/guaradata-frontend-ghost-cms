@@ -37,6 +37,6 @@ jobs:
           script: |
             cd guaradata-frontend-ghost-cms
             git pull origin main
-            sudo docker compose -f docker-compose.yaml up down
+            sudo docker compose -f docker-compose.yaml down
             sudo docker compose -f docker-compose.yaml pull
             sudo docker compose -f docker-compose.prod.yaml up --force-recreate --build -d
