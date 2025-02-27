@@ -1,0 +1,42 @@
+name: Deploy para AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do código
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # Login no Docker Hub
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      # Construir e fazer push da imagem Docker
+      - name: Construir e enviar imagem Docker
+        run: |
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/guaradata ./frontend
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/guaradata:latest
+
+      # Conectar-se à instância da AWS via SSH e executar os comandos
+      - name: Deploy na AWS
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USERNAME }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            cd guaradata-frontend-ghost-cms
+            git pull origin main
+            sudo docker compose -f docker-compose.yaml up down
+            sudo docker compose -f docker-compose.yaml pull
+            sudo docker compose -f docker-compose.prod.yaml up --force-recreate --build -d
