@@ -1,32 +1,35 @@
-name: Executar outra ação quando frontend não for alterado
+name: Deploy para AWS (Frontend)
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'frontend/**'  # Dispara apenas se houver mudanças dentro de "frontend"
 
 jobs:
-  check-frontend-changes:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    outputs:
-      frontend_changed: ${{ steps.filter.outputs.frontend }}
+
     steps:
+      # Checkout do código
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Verificar mudanças na pasta frontend
-        id: filter
-        uses: dorny/paths-filter@v3
+      # Login no Docker Hub
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
         with:
-          filters: |
-            frontend:
-              - 'frontend/**'
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-  deploy-to-aws:
-    needs: check-frontend-changes
-    if: needs.check-frontend-changes.outputs.frontend_changed == 'false'
-    runs-on: ubuntu-latest
-    steps:
+      # Construir e fazer push da imagem Docker
+      - name: Construir e enviar imagem Docker
+        run: |
+          docker build -t ivbpinheiro/guaradata:latest ./frontend
+          docker push ivbpinheiro/guaradata:latest
+
+      # Conectar-se à instância da AWS via SSH e executar os comandos
       - name: Deploy na AWS
         uses: appleboy/ssh-action@v0.1.10
         with:
