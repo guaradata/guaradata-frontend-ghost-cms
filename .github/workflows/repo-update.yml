@@ -1,0 +1,31 @@
+name: Executar outra ação quando frontend não for alterado
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-frontend-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      frontend_changed: ${{ steps.filter.outputs.frontend }}
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Verificar mudanças na pasta frontend
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            frontend:
+              - 'frontend/**'
+
+  run-other-action:
+    needs: check-frontend-changes
+    if: needs.check-frontend-changes.outputs.frontend_changed == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rodando outro workflow
+        run: echo "Frontend não mudou, rodando outra ação..."
