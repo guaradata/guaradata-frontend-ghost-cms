@@ -24,8 +24,8 @@ jobs:
       # Construir e fazer push da imagem Docker
       - name: Construir e enviar imagem Docker
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/guaradata:latest ./frontend
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/guaradata:latest
+          docker build -t ivbpinheiro/guaradata:latest ./frontend
+          docker push ivbpinheiro/guaradata:latest
 
       # Conectar-se à instância da AWS via SSH e executar os comandos
       - name: Deploy na AWS
