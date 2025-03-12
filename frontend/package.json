@@ -20,6 +20,7 @@
     "@nuxt/content": "^2.12.1",
     "@nuxtjs/mdc": "^0.7.0",
     "@tryghost/content-api": "^1.11.21",
+    "dompurify": "^3.2.4",
     "nuxt": "^3.10.3",
     "nuxt-app": "file:",
     "nuxt-storage": "^1.2.2",

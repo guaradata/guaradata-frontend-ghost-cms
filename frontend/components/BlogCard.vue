@@ -13,12 +13,12 @@
       </template>
       <template #subtitle>
         <div class="author">
-          {{ props.blogContent.excerpt.slice(0,50) + '...' }}
+          Por: {{ authorsJoin }}
         </div>
       </template>
       <template #content>
         <p class="m-0 summary">
-          {{ props.blogContent.contentSummary }}
+          {{ props.blogContent.excerpt.slice(0,50) + '...' }}
         </p>
       </template>
       <template #footer>
@@ -42,6 +42,13 @@ const props = defineProps({
     required: true
   }
 })
+
+const authorsList = props.blogContent.authors.map((element) => {
+  return element.name
+});
+
+const authorsJoin = authorsList.join(', ');
+
 // ['_id', 'title', 'author', 'content', 'publicationDate', 'updatedAt', 'category', 'keywords', 'coverImage', 'tags', 'language']
 </script>
 <style lang="scss" scoped>
