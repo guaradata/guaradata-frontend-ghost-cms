@@ -17,7 +17,7 @@
             <Button severity="danger" icon="pi pi-arrow-up-right" label="Visitar o blog" class="btn-blog m-1" rounded>
               <span class="font-bold flex justify-center items-center">
                 Entre em contato
-                <i class="pi pi-envelope ml-2" style="font-size: 1rem" />
+                <font-awesome-icon icon="envelope" class="ml-2" style="font-size: 1rem" />
               </span>
             </Button>
           </NuxtLink>

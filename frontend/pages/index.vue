@@ -11,18 +11,18 @@
           </div>
           <div class="flex justify-center mt-4">
             <NuxtLink to="/blog" class="flex justify-center items-center">
-              <Button severity="danger" icon="pi pi-arrow-up-right" label="Visitar o blog" class="btn-blog m-1" rounded>
+              <Button severity="danger" label="Visitar o blog" class="btn-blog m-1" rounded>
                 <span class="font-bold flex justify-center items-center">
                   Visitar o blog
-                  <i class="icon pi pi-arrow-up-right ml-2" style="font-size: 1rem" />
+                  <font-awesome-icon icon="arrow-up" class="icon pi pi-arrow-up-right ml-2" style="font-size: 1rem"/>
                 </span>
               </Button>
             </NuxtLink>
             <NuxtLink to="/contact" class="flex justify-center items-center" rel="noopener">
-              <Button severity="danger" icon="pi pi-arrow-up-right" label="Visitar o blog" class="btn-blog m-1" rounded>
+              <Button severity="danger" label="Visitar o blog" class="btn-blog m-1" rounded>
                 <span class="font-bold flex justify-center items-center">
                   Entre em contato
-                  <i class="pi pi-envelope ml-2" style="font-size: 1rem" />
+                  <font-awesome-icon icon="envelope" class="ml-2" style="font-size: 1rem" />
                 </span>
               </Button>
             </NuxtLink>
@@ -90,9 +90,13 @@ img {
   border: none;
 }
 
+.icon {
+  transform: rotate(45deg);
+}
+
 .btn-blog:hover .icon {
   transition: transform 0.25s ease-in-out;
-  transform: rotate(45deg);
+  transform: rotate(90deg);
 }
 
 .cards-blog-home {
