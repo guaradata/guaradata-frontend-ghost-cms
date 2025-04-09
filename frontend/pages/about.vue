@@ -35,10 +35,6 @@ const creators = [{ name: 'Ivan Pinheiro', img_url: 'https://avatars.githubuserc
 </script>
 
 <style lang="scss" scoped>
-.container-about {
-  background-color: white;
-}
-
 .divider {
   width: 75%;
   border-top: 1px solid #000000;

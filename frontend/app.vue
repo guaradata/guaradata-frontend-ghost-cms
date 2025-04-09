@@ -7,12 +7,8 @@
       <NavBar />
     </div>
     <div class="wrapper w-full">
-      <!--Banner-->
-      <!-- <GlobalBanner v-if="$route.path === '/'" /> -->
-      <!--Body-->
       <NuxtPage class="w-full" />
     </div>
-    <!--Footer-->
     <div class="footer w-full">
       <GlobalFooter />
     </div>
@@ -37,16 +33,22 @@ useSeoMeta({
   min-height: 100vh;
 }
 
+/* Navbar fixa no topo */
 .navbar {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 999;
 }
 
+/* Empurra o conteúdo para baixo da navbar */
 .wrapper {
   flex: 1;
-  margin-top: 5em;
+  margin-top: 6.1rem; /* Ajuste conforme a altura real da navbar */
 }
 
+/* Footer no final da página */
 .footer {
   margin-top: auto;
   z-index: 998;

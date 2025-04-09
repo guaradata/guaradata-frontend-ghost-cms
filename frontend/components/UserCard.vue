@@ -23,11 +23,11 @@
     <div class="flex flex-col mb-5">
       <div class="flex justify-center gap-3 mt-1">
         <NuxtLink :to="`resumes/${props.resume_id}`" class="flex justify-center items-center">
-          <Button severity="secondary" icon="pi pi-arrow-up-right" label="Visitar o blog" class="btn-profile m-1"
+          <Button severity="secondary" label="Visitar o blog" class="btn-profile m-1"
             rounded>
             <span class="font-bold flex justify-center items-center">
               Ver perfil
-              <i class="icon pi pi-arrow-up-right ml-2" style="font-size: 1rem" />
+              <font-awesome-icon icon="arrow-up" class="icon pi pi-arrow-up-right ml-2" style="font-size: 1rem"/>
             </span>
           </Button>
         </NuxtLink>
@@ -48,6 +48,10 @@
 const props = defineProps(['name', 'img_url', 'url_profile', 'subtitle', 'github_url', 'linkedin_url', 'about_me', 'resume_id'])
 </script>
 <style lang="scss" scoped>
+.p-card{
+  background-color: black !important;
+}
+
 .card {
   width: 30em;
   height: 30em;
@@ -97,8 +101,12 @@ const props = defineProps(['name', 'img_url', 'url_profile', 'subtitle', 'github
   color: black;
 }
 
+.icon {
+  transform: rotate(45deg);
+}
+
 .btn-profile:hover .icon {
   transition: transform 0.25s ease-in-out;
-  transform: rotate(45deg);
+  transform: rotate(90deg);
 }
 </style>

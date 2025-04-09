@@ -5,51 +5,37 @@
         <NuxtLink to="/">
           <div class="brand inline-block flex items-center justify-center p-0 ml-4">
             <span><img class="w-14 mr-2" src="~/assets/img/logos/guaradata-logo-3.svg"></span>
-            <!-- <h1 class="font-brand text-white font-bold text-2xl mt-0 p-0">
-              guaradata
-            </h1> -->
-            <!-- <h2 class="bg-white p-0.5 rounded text-black font-bold text-xl font-brand mt-0">
-              guara<span class="font-brand-highlight">data</span>
-            </h2> -->
           </div>
         </NuxtLink>
       </template>
       <template #item="{ item, props, hasSubmenu, root }">
         <NuxtLink v-ripple :to="item.route" class="flex align-items-center" v-bind="props.action">
           <span class="font-bold" :class="item.icon" />
-          <span class="ml-2 font-bold text-xl">{{ item.label }}</span>
+          <font-awesome-icon :icon="item.icon"></font-awesome-icon>
+          <span class="font-bold text-xl">{{ item.label }}</span>
           <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge" />
           <i v-if="hasSubmenu"
             :class="['pi pi-angle-down', { 'pi-angle-down ml-2': root, 'pi-angle-right ml-auto': !root }]" />
         </NuxtLink>
-      </template>
+      </template>      
       <template #end>
-        <NuxtLink to="/contact" class="flex justify-center items-center mr-3">
-          <Button severity="danger" icon="pi pi-arrow-up-right" label="Visitar o blog" class="btn-contact m-2" rounded>
-            <span class="font-bold">
-              Contato
-            </span>
-          </Button>
-        </NuxtLink>
-      </template>
-      <!-- <template #end>
-        <NuxtLink v-if="!authValidator" to="/contact" class="flex justify-center items-center mr-3">
-          <Button severity="danger" icon="pi pi-arrow-up-right" label="Visitar o blog" class="btn-contact m-2" rounded>
-            <span class="font-bold">
-              Contato
-            </span>
-          </Button>
-        </NuxtLink>
-        <div v-else class="flex flex-col flex justify-center items-center mr-3">
-          <NuxtLink to="/manage-content" class="flex flex-col flex justify-center items-center">
-            <Avatar icon="pi pi-user" class="m-2" size="large" style="background-color: white; color: #1a2551"
-              shape="circle" />
-            <p class="text-white font-bold">
-              Olá, {{ dataUser.userData?.name }}!
-            </p>
+        <div class="flex">
+          <NuxtLink to="/contact" class="flex justify-center items-center mr-3">
+            <Button severity="danger" label="Visitar o blog" class="btn-contact m-2" rounded>
+              <span class="font-bold">
+                Contato
+              </span>
+            </Button>
           </NuxtLink>
+          <div class="flex justify-center items-center">
+            <ToggleSwitch v-model="checked" @click="toggleDarkMode">
+              <template #handle="{ checked }">
+                  <i :class="['!text-xs pi', { 'pi-moon': !checked, 'pi-sun': checked }]" />
+              </template>
+          </ToggleSwitch>
+          </div>
         </div>
-      </template> -->
+      </template>
     </Menubar>
   </div>
 </template>
@@ -58,76 +44,35 @@
 const items = ref([
   {
     label: 'Home',
-    icon: 'pi pi-home',
+    icon: 'house',
     route: '/'
   },
   {
     label: 'Sobre',
-    icon: 'pi pi-flag',
+    icon: 'flag',
     route: '/about'
   },
   {
     label: 'Blog',
-    icon: 'pi pi-book',
+    icon: 'book',
     route: '/blog'
   }
-  // {
-  //   label: 'Projetos',
-  //   icon: 'pi pi-box',
-  //   items: [
-  //     {
-  //       label: 'Engenharia de Dados',
-  //       icon: 'pi pi-cog',
-  //       route: '/data-engineering'
-  //     },
-  //     {
-  //       label: 'Ciência de dados',
-  //       icon: 'pi pi-chart-bar',
-  //       route: '/data-science'
-  //     },
-  //     {
-  //       label: 'Outros',
-  //       icon: 'pi pi-bolt',
-  //       items: [
-  //         {
-  //           label: 'Frontend',
-  //           icon: 'pi pi-palette',
-  //           route: '/frontend'
-  //         },
-  //         {
-  //           label: 'Backend',
-  //           icon: 'pi pi-server',
-  //           route: '/backend'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
 ])
-// const dataUser = ref('')
-// const authValidator = ref(false)
-// const route = useRoute();
+const isDarkMode = ref(true)
+const checked = ref(true);
 
-// const validateAvatar = async () => {
-//   const getDataValidator = localStorage.getItem('auth');
-//   if (getDataValidator) {
-//     dataUser.value = await LoginUtils.LoginService.validate(true);
-//     authValidator.value = true;
-//   } else {
-//     authValidator.value = false;
-//   }
-// }
+onMounted(() => {
+  isDarkMode.value = document.documentElement.classList.contains('dark-mode')  
+})
 
-// onMounted(async () => {
-//   return await validateAvatar();
-// })
-
-// watch(
-//   () => route.fullPath,
-//   async () => {
-//     return await validateAvatar();
-//   }
-// );
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value
+  if (isDarkMode.value) {
+    document.documentElement.classList.add('dark-mode')
+  } else {
+    document.documentElement.classList.remove('dark-mode')
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -143,6 +88,7 @@ const items = ref([
 
 .btn-contact:hover {
   background-color: white;
+  border: none;
   color: black;
 }
 </style>
