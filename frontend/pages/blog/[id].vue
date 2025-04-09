@@ -2,18 +2,25 @@
   <div>
     <div v-if="data">
       <div class="cover">
-        <img :src="data.feature_image" alt="Imagem de capa">
+        <img :src="data.feature_image" alt="Imagem de capa" />
       </div>
+
       <div class="title">
         {{ data.title }}
       </div>
-      <div class="content">
-        <div v-html="sanitizedHtml" />
-      </div>
+
+      <!-- Renderização só no cliente -->
+      <ClientOnly>
+        <div class="content">
+          <div v-html="sanitizedHtml" />
+        </div>
+      </ClientOnly>
     </div>
+
     <div v-else-if="error">
       <p>Erro ao carregar o post.</p>
     </div>
+
     <div v-else>
       <p>Carregando...</p>
     </div>
@@ -70,6 +77,33 @@ const addCopyButtonsToCodeBlocks = () => {
     });
   }, 100); // Pequeno atraso para garantir que os elementos foram renderizados
 };
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": data.value?.title,
+        "image": [data.value?.feature_image],
+        "author": {
+          "@type": "Person",
+          "name": data.value?.primary_author?.name || "Nome do autor"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Nome do site",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "/logo.png"
+          }
+        },
+        "datePublished": data.value?.published_at,
+        "dateModified": data.value?.updated_at
+      })
+    }
+  ]
+});
 
 useSeoMeta({
   title: () => data.value.title,
@@ -77,7 +111,7 @@ useSeoMeta({
   ogImage: () => data.value.feature_image,
   description: () => data.value.meta_description,
   ogDescription: () => data.value.meta_description,
-  
+
   //Bots
   robots: 'index, follow'
 })
