@@ -72,8 +72,8 @@ const addCopyButtonsToCodeBlocks = () => {
 };
 
 useSeoMeta({
-  title: () => dynamicTitle.value,
-  ogTitle: () => dynamicTitle.value,
+  title: () => data.value.title,
+  ogTitle: () => data.value.title,
   ogImage: () => data.value.feature_image,
   description: () => data.value.meta_description,
   ogDescription: () => data.value.meta_description,
