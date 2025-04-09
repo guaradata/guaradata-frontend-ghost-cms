@@ -15,7 +15,25 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://guaradata.com.br/' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Guaradata",
+        "url": "https://guaradata.com.br/"
+      })
+    }
+  ]
+});
+
 useSeoMeta({
   // Básico
   title: 'Guaradata',
