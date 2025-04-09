@@ -77,6 +77,9 @@ useSeoMeta({
   ogImage: () => data.value.feature_image,
   description: () => data.value.meta_description,
   ogDescription: () => data.value.meta_description,
+  
+  //Bots
+  robots: 'index, follow'
 })
 </script>
 
