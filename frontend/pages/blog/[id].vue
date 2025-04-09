@@ -77,6 +77,7 @@ const addCopyButtonsToCodeBlocks = () => {
     });
   }, 100); // Pequeno atraso para garantir que os elementos foram renderizados
 };
+
 useHead({
   script: [
     {
@@ -106,11 +107,11 @@ useHead({
 });
 
 useSeoMeta({
-  title: () => data.value.title,
-  ogTitle: () => data.value.title,
-  ogImage: () => data.value.feature_image,
-  description: () => data.value.meta_description,
-  ogDescription: () => data.value.meta_description,
+  title: () => data.value?.title || 'Post Guaradata',
+  ogTitle: () => data.value?.title || 'Guaradata',
+  ogImage: () => data.value?.feature_image || 'https://guaradata.com.br/img/guaradata-logo.jpg',
+  description: () => data.value?.meta_description || 'Blog Guaradata',
+  ogDescription: () => data.value?.meta_description || 'Blog Guaradata',
 
   //Bots
   robots: 'index, follow'
