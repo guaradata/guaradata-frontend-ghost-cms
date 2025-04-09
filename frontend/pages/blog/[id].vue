@@ -70,6 +70,14 @@ const addCopyButtonsToCodeBlocks = () => {
     });
   }, 100); // Pequeno atraso para garantir que os elementos foram renderizados
 };
+
+useSeoMeta({
+  title: () => dynamicTitle.value,
+  ogTitle: () => dynamicTitle.value,
+  ogImage: () => data.value.feature_image,
+  description: () => data.value.meta_description,
+  ogDescription: () => data.value.meta_description,
+})
 </script>
 
 <style scoped>

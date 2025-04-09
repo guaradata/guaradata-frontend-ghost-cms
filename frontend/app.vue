@@ -19,9 +19,9 @@
 useSeoMeta({
   title: 'Guaradata',
   ogTitle: 'Guaradata',
-  description: 'This is Guaradata, let me tell you all about it.',
-  ogDescription: 'This is Guaradata, let me tell you all about it.',
-  ogImage: 'https://example.com/image.png',
+  description: 'Guaradata é um projeto que visa compartilhar conteúdos sobre diversas áreas do universo dos dados.',
+  ogDescription: 'Guaradata é um projeto que visa compartilhar conteúdos sobre diversas áreas do universo dos dados.',
+  ogImage: 'https://guaradata.com.br/_nuxt/guaradata-logo-3.Dsu9jtfV.svg',
   twitterCard: 'summary_large_image'
 })
 </script>
