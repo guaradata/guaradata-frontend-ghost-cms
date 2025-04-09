@@ -56,6 +56,18 @@ onMounted(async () => {
     responseGhost.value = []
   }
 })
+
+useSeoMeta({
+  title: 'Guaradata',
+  description: 'Guaradata é um projeto que visa compartilhar conteúdos sobre diversas áreas do universo dos dados.',
+  ogTitle: 'Guaradata',
+  ogDescription: 'Guaradata é um projeto que visa compartilhar conteúdos sobre diversas áreas do universo dos dados.',
+  ogImage: 'https://guaradata.com.br/img/guaradata-logo.jpg',
+  ogUrl: 'https://guaradata.com.br',
+  twitterCard: 'summary_large_image',
+  twitterImage: 'https://guaradata.com.br/img/guaradata-logo.jpg'
+});
+
 </script>
 <style lang="scss" scoped>
 .img-container {

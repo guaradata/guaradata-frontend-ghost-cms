@@ -16,7 +16,6 @@
 </template>
 
 <script setup>
-
 useHead({
   link: [
     { rel: 'canonical', href: 'https://guaradata.com.br/' }
@@ -33,38 +32,6 @@ useHead({
     }
   ]
 });
-
-useSeoMeta({
-  // Básico
-  title: 'Guaradata',
-  description: 'Guaradata é um projeto que visa compartilhar conteúdos sobre diversas áreas do universo dos dados.',
-  author: 'Guaradata',
-
-  // Open Graph (Facebook, LinkedIn, etc.)
-  ogTitle: 'Guaradata',
-  ogDescription: 'Guaradata é um projeto que visa compartilhar conteúdos sobre diversas áreas do universo dos dados.',
-  ogImage: 'https://guaradata.com.br/img/guaradata-logo.jpg',
-  ogUrl: 'https://guaradata.com.br',
-  ogType: 'website',
-  ogSiteName: 'Guaradata',
-  ogLocale: 'pt_BR',
-
-  // Twitter
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'Guaradata',
-  twitterDescription: 'Guaradata é um projeto que visa compartilhar conteúdos sobre diversas áreas do universo dos dados.',
-  twitterImage: 'https://guaradata.com.br/img/guaradata-logo-3.svg',
-  twitterSite: '@guaradata', // Substitua pelo @ real se houver
-  twitterCreator: '@guaradata', // Idem
-
-  // Mobile/SEO
-  viewport: 'width=device-width, initial-scale=1',
-  themeColor: '#ffffff',
-
-  //Bots
-  robots: 'index, follow'
-})
-
 </script>
 
 <style scoped>
