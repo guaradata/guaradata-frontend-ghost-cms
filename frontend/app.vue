@@ -43,7 +43,7 @@ useSeoMeta({
   // Open Graph (Facebook, LinkedIn, etc.)
   ogTitle: 'Guaradata',
   ogDescription: 'Guaradata é um projeto que visa compartilhar conteúdos sobre diversas áreas do universo dos dados.',
-  ogImage: 'https://guaradata.com.br/img/guaradata-logo-3.svg',
+  ogImage: 'https://guaradata.com.br/img/guaradata-logo.jpg',
   ogUrl: 'https://guaradata.com.br',
   ogType: 'website',
   ogSiteName: 'Guaradata',
