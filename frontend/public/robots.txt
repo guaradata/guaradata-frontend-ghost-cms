@@ -1,1 +1,5 @@
+User-agent: *
+Disallow: /ghost-api/ghost/
+Allow: /
 
+Sitemap: https://guaradata.com.br/sitemap.xml

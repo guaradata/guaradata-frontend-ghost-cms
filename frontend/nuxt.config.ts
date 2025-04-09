@@ -15,7 +15,8 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@primevue/nuxt-module'
+    '@primevue/nuxt-module',
+    '@nuxtjs/sitemap'
   ],
 
   primevue: {
