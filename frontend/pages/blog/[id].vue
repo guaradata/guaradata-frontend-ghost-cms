@@ -2,18 +2,25 @@
   <div>
     <div v-if="data">
       <div class="cover">
-        <img :src="data.feature_image" alt="Imagem de capa">
+        <img :src="data.feature_image" alt="Imagem de capa" />
       </div>
+
       <div class="title">
         {{ data.title }}
       </div>
-      <div class="content">
-        <div v-html="sanitizedHtml" />
-      </div>
+
+      <!-- Renderização só no cliente -->
+      <ClientOnly>
+        <div class="content">
+          <div v-html="sanitizedHtml" />
+        </div>
+      </ClientOnly>
     </div>
+
     <div v-else-if="error">
       <p>Erro ao carregar o post.</p>
     </div>
+
     <div v-else>
       <p>Carregando...</p>
     </div>
@@ -77,7 +84,7 @@ useSeoMeta({
   ogImage: () => data.value.feature_image,
   description: () => data.value.meta_description,
   ogDescription: () => data.value.meta_description,
-  
+
   //Bots
   robots: 'index, follow'
 })
