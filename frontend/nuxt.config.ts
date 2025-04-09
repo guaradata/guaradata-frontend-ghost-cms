@@ -14,10 +14,11 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@primevue/nuxt-module',
-    '@nuxtjs/sitemap'
-  ],
+  modules: ['@primevue/nuxt-module', '@nuxtjs/sitemap', 'nuxt-gtag'],
+  
+  gtag: {
+    id: 'GTM-PGNHVC88'
+  },
 
   primevue: {
     options: {
