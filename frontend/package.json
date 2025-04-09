@@ -20,6 +20,7 @@
     "@tailwindcss/vite": "^4.0.14",
     "@tryghost/content-api": "^1.11.21",
     "dompurify": "^3.2.4",
+    "github-markdown-css": "^5.8.1",
     "nuxt": "^3.16.0",
     "nuxt-app": "file:",
     "primeicons": "^7.0.0",

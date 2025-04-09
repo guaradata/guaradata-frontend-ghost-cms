@@ -30,7 +30,7 @@
           <div class="flex justify-center items-center">
             <ToggleSwitch v-model="checked" @click="toggleDarkMode">
               <template #handle="{ checked }">
-                  <i :class="['!text-xs pi', { 'pi-sun': !checked, 'pi-moon': checked }]" />
+                  <i :class="['!text-xs pi', { 'pi-moon': !checked, 'pi-sun': checked }]" />
               </template>
           </ToggleSwitch>
           </div>
@@ -62,12 +62,11 @@ const isDarkMode = ref(true)
 const checked = ref(true);
 
 onMounted(() => {
-  isDarkMode.value = document.documentElement.classList.contains('dark-mode')
+  isDarkMode.value = document.documentElement.classList.contains('dark-mode')  
 })
 
 const toggleDarkMode = () => {
   isDarkMode.value = !isDarkMode.value
-
   if (isDarkMode.value) {
     document.documentElement.classList.add('dark-mode')
   } else {

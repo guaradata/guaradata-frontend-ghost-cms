@@ -21,19 +21,67 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import DOMPurify from 'dompurify';
 import { getPost } from '~/utils/GhostSdk';
 import { useRoute, useAsyncData } from '#app';
 
 const route = useRoute();
 
-const { data, error } = await useAsyncData(() => getPost(route.params.id));
+const { data, error } = await useAsyncData(`post-${route.params.id}`, async () => {
+  const post = await getPost(route.params.id);
+  return JSON.parse(JSON.stringify(post.posts[0]));
+});
 
-const sanitizedHtml = computed(() => (data.value ? DOMPurify.sanitize(data.value.html) : ''));
+const sanitizedHtml = ref("");
+
+onMounted(() => {
+  if (data.value.html) {
+    sanitizedHtml.value = DOMPurify.sanitize(data.value.html);
+    addCopyButtonsToCodeBlocks();
+  }
+});
+
+const addCopyButtonsToCodeBlocks = () => {
+  setTimeout(() => {
+    document.querySelectorAll("pre code").forEach((codeBlock) => {
+      const pre = codeBlock.parentElement;
+      if (!pre) return;
+
+      // Se já existe um botão, não adiciona novamente
+      if (pre.querySelector(".copy-btn")) return;
+
+      const button = document.createElement("button");
+      button.classList.add("copy-btn");
+      button.textContent = "Copiar";
+
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(codeBlock.textContent);
+          button.textContent = "Copiado!";
+          setTimeout(() => (button.textContent = "Copiar"), 1500);
+        } catch (err) {
+          console.error("Erro ao copiar:", err);
+        }
+      });
+
+      pre.style.position = "relative"; // Para posicionar o botão corretamente
+      pre.appendChild(button);
+    });
+  }, 100); // Pequeno atraso para garantir que os elementos foram renderizados
+};
 </script>
 
 <style scoped>
+/* Modo Escuro */
+.dark-mode .copy-btn {
+  background: #61dafb;
+  color: #1e1e1e;
+}
+
+.dark-mode .copy-btn:hover {
+  background: #4fa3d1;
+}
 /* Container principal */
 .title {
   display: flex;
@@ -232,5 +280,37 @@ const sanitizedHtml = computed(() => (data.value ? DOMPurify.sanitize(data.value
 ::v-deep(.kg-image-card img) {
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Modo Escuro */
+.dark-mode .content {
+  color: #e0e0e0;
+}
+
+/* Bloco de citação */
+.dark-mode ::v-deep(.content blockquote) {
+  border-left: 4px solid #e0e0e0;
+  color: #b0b0b0;
+}
+
+/* Código inline */
+.dark-mode ::v-deep(.content code) {
+  background: #444;
+  color: #f8f8f2;
+}
+
+/* Blocos de Código */
+.dark-mode ::v-deep(.content pre) {
+  background: #282c34;
+  color: #abb2bf;
+}
+
+/* Links */
+.dark-mode ::v-deep(.content a) {
+  color: #61dafb;
+}
+
+.dark-mode ::v-deep(.content a:hover) {
+  color: #4fa3d1;
 }
 </style>
