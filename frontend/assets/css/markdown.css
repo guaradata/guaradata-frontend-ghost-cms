@@ -8,7 +8,7 @@
 
 html.dark-mode .markdown-body {
   color: #c9d1d9;
-  background-color: #0d1117;
+  background-color: #121212;
 }
 
 html.dark-mode .markdown-body a {
@@ -16,7 +16,7 @@ html.dark-mode .markdown-body a {
 }
 
 html.dark-mode .markdown-body pre {
-  background-color: #161b22;
+  background-color: #121212;
 }
 
 /* Garante que no modo claro as tabelas usem o fundo padrão */
