@@ -12,7 +12,7 @@
       <!-- Renderização só no cliente -->
       <ClientOnly>
         <div class="content">
-          <div v-html="sanitizedHtml" />
+          <div class="markdown-body" v-html="sanitizedHtml" />
         </div>
       </ClientOnly>
     </div>
@@ -119,15 +119,6 @@ useSeoMeta({
 </script>
 
 <style scoped>
-/* Modo Escuro */
-.dark-mode .copy-btn {
-  background: #61dafb;
-  color: #1e1e1e;
-}
-
-.dark-mode .copy-btn:hover {
-  background: #4fa3d1;
-}
 /* Container principal */
 .title {
   display: flex;
@@ -136,7 +127,7 @@ useSeoMeta({
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 3rem;
   font-weight: bold;
-  margin: 20px 15px;
+  margin: 30px 15px;
 }
 
 /* Imagem de capa */
@@ -157,7 +148,7 @@ useSeoMeta({
 
 /* Conteúdo */
 .content {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 35px auto;
   padding: 20px;
   font-size: 1.125rem;
@@ -213,150 +204,7 @@ useSeoMeta({
     padding: 10px;
   }
 }
-
-/* Estilizando conteúdo */
-:deep(.content h1) {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-top: 40px;
-}
-
-:deep(.content h2) {
-  font-size: 1.8rem;
-  margin-top: 30px;
-}
-
-:deep(.content h3) {
-  font-size: 1.5rem;
-  margin-top: 25px;
-}
-
-:deep(.content p) {
-  font-size: 1.125rem;
-  margin: 1rem 0;
-}
-
-/* Estilizando títulos */
-:deep(.content h1) {
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-top: 40px;
-}
-
-:deep(.content h2) {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-top: 30px;
-}
-
-:deep(.content h3) {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-top: 25px;
-}
-
-/* Parágrafos */
-:deep(.content p) {
-  font-size: 1.125rem;
-  margin: 1rem 0;
-}
-
-/* Links */
-:deep(.content a) {
-  color: #007bff;
-  text-decoration: underline;
-  transition: color 0.3s ease;
-}
-
-:deep(.content a:hover) {
-  color: #0056b3;
-}
-
-/* Bloco de citação */
-::v-deep(.content blockquote) {
-  border-left: 4px solid #15171A;
-  padding-left: 20px;
-  font-style: italic;
-  color: #63666A;
-  margin: 20px 0;
-}
-
-/* Código inline */
-::v-deep(.content code) {
-  background: #f4f4f4;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: 'Courier New', monospace;
-}
-
-/* Blocos de Código */
-::v-deep(.content pre) {
-  background: #272822;
-  color: #f8f8f2;
-  padding: 15px;
-  border-radius: 5px;
-  overflow-x: auto;
-}
-
-::v-deep(.content pre code) {
-  background: none;
-  padding: 0;
-  color: inherit;
-}
-
-/* Listas */
-::v-deep(.content ul),
-::v-deep(.content ol) {
-  padding-left: 20px;
-  margin: 1rem 0;
-}
-
-::v-deep(.content li) {
-  margin-bottom: 0.5rem;
-}
-
-/* Imagens */
-::v-deep(.content img) {
-  max-width: 100%;
-  border-radius: 5px;
-  display: block;
-  margin: 1rem auto;
-}
-
-::v-deep(.kg-image-card img) {
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Modo Escuro */
-.dark-mode .content {
-  color: #e0e0e0;
-}
-
-/* Bloco de citação */
-.dark-mode ::v-deep(.content blockquote) {
-  border-left: 4px solid #e0e0e0;
-  color: #b0b0b0;
-}
-
-/* Código inline */
-.dark-mode ::v-deep(.content code) {
-  background: #444;
-  color: #f8f8f2;
-}
-
-/* Blocos de Código */
-.dark-mode ::v-deep(.content pre) {
-  background: #282c34;
-  color: #abb2bf;
-}
-
-/* Links */
-.dark-mode ::v-deep(.content a) {
-  color: #61dafb;
-}
-
-.dark-mode ::v-deep(.content a:hover) {
-  color: #4fa3d1;
+.markdown-body{
+  font-size: 20px;
 }
 </style>

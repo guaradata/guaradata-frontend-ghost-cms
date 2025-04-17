@@ -1,0 +1,33 @@
+@import "github-markdown-css/github-markdown.css";
+
+/* markdown.css */
+.markdown-body {
+  color: #24292f;
+  background-color: white;
+}
+
+html.dark-mode .markdown-body {
+  color: #c9d1d9;
+  background-color: #0d1117;
+}
+
+html.dark-mode .markdown-body a {
+  color: #58a6ff;
+}
+
+html.dark-mode .markdown-body pre {
+  background-color: #161b22;
+}
+
+/* Garante que no modo claro as tabelas usem o fundo padrão */
+html:not(.dark-mode) .markdown-body table {
+  background-color: white;
+}
+
+html:not(.dark-mode) .markdown-body th {
+  background-color: #f6f8fa;
+}
+
+html:not(.dark-mode) .markdown-body td {
+  background-color: white;
+}
