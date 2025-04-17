@@ -53,10 +53,16 @@ const addCopyButtonsToCodeBlocks = () => {
   setTimeout(() => {
     document.querySelectorAll("pre code").forEach((codeBlock) => {
       const pre = codeBlock.parentElement;
-      if (!pre) return;
+      if (!pre || pre.dataset.enhanced === "true") return;
 
-      // Se já existe um botão, não adiciona novamente
-      if (pre.querySelector(".copy-btn")) return;
+      // Criar um wrapper
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+      wrapper.classList.add("code-wrapper");
+
+      // Inserir o wrapper antes do <pre> e mover o <pre> para dentro
+      pre.parentElement.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
 
       const button = document.createElement("button");
       button.classList.add("copy-btn");
@@ -72,10 +78,12 @@ const addCopyButtonsToCodeBlocks = () => {
         }
       });
 
-      pre.style.position = "relative"; // Para posicionar o botão corretamente
-      pre.appendChild(button);
+      wrapper.appendChild(button);
+
+      // Evita duplicar
+      pre.dataset.enhanced = "true";
     });
-  }, 100); // Pequeno atraso para garantir que os elementos foram renderizados
+  }, 100);
 };
 
 useHead({
@@ -204,7 +212,8 @@ useSeoMeta({
     padding: 10px;
   }
 }
-.markdown-body{
+
+.markdown-body {
   font-size: 20px;
 }
 </style>
