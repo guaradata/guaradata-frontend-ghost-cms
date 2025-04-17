@@ -40,7 +40,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/main.css', '~/assets/css/base.css', '@fortawesome/fontawesome-svg-core/styles.css', '~/assets/scss/main.scss'],
+  css: ['~/assets/css/main.css', '~/assets/css/base.css', '@fortawesome/fontawesome-svg-core/styles.css', '~/assets/scss/main.scss', '~/assets/css/markdown.css'],
 
   vite: {
     plugins: [
