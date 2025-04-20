@@ -111,6 +111,13 @@ useHead({
         "dateModified": data.value?.updated_at
       })
     }
+  ],
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: 'https://guaradata.com.br/favicon.ico'
+    }
   ]
 });
 
@@ -118,9 +125,14 @@ useSeoMeta({
   title: () => data.value?.title || 'Post Guaradata',
   ogTitle: () => data.value?.title || 'Guaradata',
   ogImage: () => data.value?.feature_image || 'https://guaradata.com.br/img/guaradata-logo.jpg',
-  description: () => data.value?.meta_description || 'Blog Guaradata',
-  ogDescription: () => data.value?.meta_description || 'Blog Guaradata',
-
+  description: () => data.value?.excerpt || 'Blog Guaradata',
+  ogDescription: () => data.value?.excerpt || 'Blog Guaradata',
+  lang: () => 'pt-BR',
+  ogUrl: () => `https://guaradata.com.br/blog/${route.params.id}`,
+  twitterTitle: () => data.value?.title || 'Post Guaradata',
+  twitterDescription: () => data.value?.excerpt || 'Blog Guaradata',
+  twitterImage: data.value?.feature_image || 'https://guaradata.com.br/img/guaradata-logo.jpg',
+  twitterCard: () => data.value?.excerpt || 'Blog Guaradata',
   //Bots
   robots: 'index, follow'
 })
