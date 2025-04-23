@@ -114,6 +114,7 @@ const authorsJoin = authorsList.join(', ');
   background-color: var(--surface-card);
   color: var(--primary-color);
   border-color: var(--primary-color);
+  border: solid 2px black;
 }
 /* Fim Modo Claro */
 
@@ -134,6 +135,7 @@ const authorsJoin = authorsList.join(', ');
   background-color: var(--surface-card);
   color: var(--primary-color);
   border-color: var(--primary-color);
+  border: solid 2px white;
 }
 
 .dark-mode .card {
