@@ -15,13 +15,17 @@ export default defineNuxtConfig({
   },
 
   modules: ['@primevue/nuxt-module', '@nuxtjs/sitemap', '@nuxt/scripts'],
-  
+
   scripts: {
     registry: {
       googleTagManager: {
         id: 'GTM-PGNHVC88'
       }
     }
+  },
+
+  sitemap: {
+    sources: ['/api/__sitemap__/urls'],
   },
 
   primevue: {
