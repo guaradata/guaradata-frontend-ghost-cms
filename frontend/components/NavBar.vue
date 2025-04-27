@@ -21,7 +21,7 @@
       <template #end>
         <div class="flex">
           <NuxtLink to="/contact" class="flex justify-center items-center mr-3">
-            <Button severity="danger" label="Visitar o blog" class="btn-contact m-2" rounded>
+            <Button unstyled severity="danger" label="Visitar o blog" class="btn-contact m-2 p-3 rounded-3xl" rounded>
               <span class="font-bold">
                 Contato
               </span>
@@ -84,11 +84,31 @@ const toggleDarkMode = () => {
   background-color: $contact-color;
   border: none;
   color: black;
+  cursor: pointer;
+  border: solid 2px $contact-color;
 }
 
 .btn-contact:hover {
   background-color: white;
   border: none;
   color: black;
+  cursor: pointer;
+  border: solid 2px black;
+}
+
+.dark-mode .btn-contact {
+  background-color: $contact-color;
+  border: none;
+  color: black;
+  cursor: pointer;
+  border: solid 2px $black-mode;
+}
+
+.dark-mode .btn-contact:hover {
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+  border: solid 2px $black-mode;
 }
 </style>

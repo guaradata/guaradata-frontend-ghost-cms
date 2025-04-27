@@ -23,7 +23,7 @@
       </template>
       <template #footer>
         <div class="flex justify-center items-center">
-          <Button icon="pi pi-arrow-up-right" label="Ler mais" class="btn-go-blog m-1" rounded>
+          <Button unstyled icon="pi pi-arrow-up-right" label="Ler mais" class="btn-go-blog m-1 p-3 rounded-3xl" rounded>
             <span class="font-bold flex justify-center items-center">
               Ler mais
               <i class="icon pi pi-spin pi-cog ml-2" style="font-size: 1rem" />
@@ -108,6 +108,7 @@ const authorsJoin = authorsList.join(', ');
   color: white;
   border: solid 2px transparent;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .btn-go-blog:hover {
@@ -122,6 +123,7 @@ const authorsJoin = authorsList.join(', ');
 .dark-mode .card {
   background-color: var(--surface-ground);
   color: var(--text-color-secondary);
+  cursor: pointer;
 }
 
 .dark-mode .btn-go-blog {
