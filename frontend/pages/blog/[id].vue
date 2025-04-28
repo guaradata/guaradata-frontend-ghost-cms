@@ -9,8 +9,11 @@
         {{ data.title }}
       </div>
 
-      <!-- Renderização só no cliente -->
       <ClientOnly>
+        <div class="author">
+          <AuthorCard v-for="item in data.authors" :key="item.name" :name="item.name" :img_url="item.profile_image"
+            :linkedin_url="`https://www.linkedin.com/in/${item.linkedin}`" :github_url="item.website"></AuthorCard>
+        </div>
         <div class="content">
           <div class="markdown-body" v-html="sanitizedHtml" />
         </div>
@@ -39,6 +42,8 @@ const { data, error } = await useAsyncData(`post-${route.params.id}`, async () =
   const post = await getPost(route.params.id);
   return JSON.parse(JSON.stringify(post.posts[0]));
 });
+
+console.log(data.value.authors)
 
 const sanitizedHtml = ref("");
 
@@ -227,5 +232,25 @@ useSeoMeta({
 
 .markdown-body {
   font-size: 20px;
+}
+
+.author {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5em;
+  width: 100%;
+}
+
+@media (max-width: 560px) {
+  .author {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1em;
+  }
 }
 </style>
