@@ -53,12 +53,6 @@
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eslint/eslint-original-wordmark.svg">
         </NuxtLink>
       </div>
-      <div class="img p-5">
-        <NuxtLink to="https://quilljs.com/">
-          <img
-            src="https://kenoleon.github.io/Front-End-Web-Dev-UI-UX/assets/images/quilljsLogo.png">
-        </NuxtLink>
-      </div>
     </div>
   </div>
 </template>
