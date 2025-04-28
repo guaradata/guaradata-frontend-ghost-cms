@@ -38,8 +38,8 @@
               </NuxtLink>
             </li>
             <li>
-              <a href="/ghost-api/ghost/" class="text-gray-200 hover:text-white">
-                Administração
+              <a href="https://github.com/guaradata" class="text-gray-200 hover:text-white">
+                Github Guaradata
               </a>
             </li>
           </ul>
