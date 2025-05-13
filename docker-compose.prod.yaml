@@ -41,10 +41,11 @@ services:
       - MYSQL_DATABASE=${DATABASE_NAME}
     volumes:
       - db:/var/lib/mysql
+      - ./mysql_backups:/backups
     networks:
       - guaradata-backend
 
-  nuxt-guaradata:
+  nuxt_guaradata:
     image: ivbpinheiro/guaradata:latest
     restart: always
     env_file: .env
@@ -55,9 +56,34 @@ services:
     networks:
       - guaradata-backend
 
+  mysql_backup:
+    image: mysql:8.0
+    profiles: ["backup"]
+    entrypoint: ["sh", "-c"]
+    command: >
+      "mysqldump -h ghost_mysql -u ${DATABASE_USER} -p${DATABASE_USER_PASSWORD} ${DATABASE_NAME} > /backups/backup.sql"
+    volumes:
+      - ./mysql_backups:/backups
+    depends_on:
+      - ghost_mysql
+    networks:
+      - guaradata-backend
+    env_file: .env
+  
+  guaradata_portainer:
+    image: portainer/portainer-ce:alpine
+    container_name: portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - guaradata-backend
+
 volumes:
   ghost:
   db:
+  portainer_data:
 
 networks:
   guaradata-backend:
