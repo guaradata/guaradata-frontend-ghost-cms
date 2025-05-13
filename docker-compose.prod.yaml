@@ -30,6 +30,7 @@ services:
       - mail__options__port=${MAIL_PORT}
       - mail__options__auth__user=${MAIL_AUTH_USER}
       - mail__options__auth__pass=${MAIL_AUTH_PASS}
+      - mail__from=${MAIL_FROM}
     volumes:
       - ghost:/var/lib/ghost/content
     networks:
