@@ -25,11 +25,11 @@ services:
       - database__connection__password=${DATABASE_PASSWORD}
       - database__connection__database=${DATABASE_NAME}
       - url=${GHOST_URL}
-      - mail__transport:${MAIL_TRANSPORT}
-      - mail__options__host${MAIL_HOST}
-      - mail__options__port${MAIL_PORT}
-      - mail__options__auth__user${MAIL_AUTH_USER}
-      - mail__options__auth__pass${MAIL_AUTH_PASS}
+      - mail__transport=${MAIL_TRANSPORT}
+      - mail__options__host=${MAIL_HOST}
+      - mail__options__port=${MAIL_PORT}
+      - mail__options__auth__user=${MAIL_AUTH_USER}
+      - mail__options__auth__pass=${MAIL_AUTH_PASS}
     volumes:
       - ghost:/var/lib/ghost/content
     networks:
