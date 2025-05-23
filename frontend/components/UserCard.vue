@@ -3,7 +3,7 @@
     <Card style="overflow: hidden" class="card mt-8 mb-8 rounded">
       <template #header>
         <div class="flex justify-center m-8">
-          <img :src="props.img_url" class="img-profile rounded-full size-52" alt="">
+          <img :src="props.img_url" class="img-profile rounded-full w-52 h-52 object-cover" alt="" />
         </div>
       </template>
       <template #title>
@@ -23,11 +23,10 @@
     <div class="flex flex-col mb-5">
       <div class="flex justify-center gap-3 mt-1">
         <NuxtLink :to="`resumes/${props.resume_id}`" class="flex justify-center items-center">
-          <Button severity="secondary" label="Visitar o blog" class="btn-profile m-1"
-            rounded>
+          <Button severity="secondary" label="Visitar o blog" class="btn-profile m-1" rounded>
             <span class="font-bold flex justify-center items-center">
               Ver perfil
-              <font-awesome-icon icon="arrow-up" class="icon pi pi-arrow-up-right ml-2" style="font-size: 1rem"/>
+              <font-awesome-icon icon="arrow-up" class="icon pi pi-arrow-up-right ml-2" style="font-size: 1rem" />
             </span>
           </Button>
         </NuxtLink>
@@ -48,7 +47,7 @@
 const props = defineProps(['name', 'img_url', 'url_profile', 'subtitle', 'github_url', 'linkedin_url', 'about_me', 'resume_id'])
 </script>
 <style lang="scss" scoped>
-.p-card{
+.p-card {
   background-color: black !important;
 }
 

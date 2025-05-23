@@ -1,3 +1,5 @@
+import { ofetch } from 'ofetch';
+
 export async function getPosts() {
   const { $ghostApi } = useNuxtApp();
 
@@ -18,6 +20,19 @@ export async function getPost(postSlug) {
     return data.value;
   } catch (err) {
     console.error(`Erro ao buscar o post: ${postSlug}`, err);
+    return null;
+  }
+}
+
+export async function getAuthors() {
+  const runtimeConfig = useRuntimeConfig();
+  const apiUrl = `${runtimeConfig.public.ghostApiBase}/ghost/api/content/authors`;
+
+  try {
+    const data = await ofetch(`${apiUrl}/?key=${runtimeConfig.public.ghostApiKey}&include=count.posts`);
+    return data; // já inclui authors
+  } catch (err) {
+    console.error('Erro ao buscar autores:', err);
     return null;
   }
 }
